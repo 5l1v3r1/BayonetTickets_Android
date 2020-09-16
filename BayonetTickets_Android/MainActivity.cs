@@ -26,9 +26,9 @@ namespace BayonetTickets_Android
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
+            Window.RequestFeature(WindowFeatures.NoTitle);
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
             SetContentView(Resource.Layout.activity_main);
-            Window.RequestFeature(WindowFeatures.NoTitle);
 
             web_view = FindViewById<WebView>(Resource.Id.web_View);
             web_view.Settings.JavaScriptEnabled = true;
