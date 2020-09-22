@@ -33,7 +33,7 @@ namespace BayonetTickets_Android
             web_view = FindViewById<WebView>(Resource.Id.web_View);
             web_view.Settings.JavaScriptEnabled = true;
             web_view.SetWebViewClient(new WebClientViewer());
-            web_view.LoadUrl("http://18.219.73.179:80");
+            web_view.LoadUrl("http://18.223.26.171:80");
         }
 
         public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Android.Content.PM.Permission[] grantResults)
