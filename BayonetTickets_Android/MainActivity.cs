@@ -17,12 +17,16 @@ using Xamarin.Forms;
 using AlertDialog = Android.App.AlertDialog;
 using Button = Android.Widget.Button;
 using CheckBox = Android.Widget.CheckBox;
+using Microsoft.AppCenter;
+using Microsoft.AppCenter.Analytics;
+using Microsoft.AppCenter.Crashes;
 
 namespace BayonetTickets_Android
 {
     [Activity(Label = "Bayonet Tickets", Theme= "@style/AppTheme", MainLauncher = true)]
     public class MainActivity : AppCompatActivity
     {
+
         static string AUTH_TOKEN;
         static string USER_ID;
         const string API_URL = "https://bayonetchat.com/api/v1/";
@@ -34,6 +38,8 @@ namespace BayonetTickets_Android
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
+            AppCenter.Start("576b46f7-5eb3-4a49-88fa-309341fb2054",
+                   typeof(Analytics), typeof(Crashes));
             base.OnCreate(savedInstanceState);
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
             SetContentView(Resource.Layout.activity_main);
