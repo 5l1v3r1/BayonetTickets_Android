@@ -20,6 +20,7 @@ using CheckBox = Android.Widget.CheckBox;
 using Microsoft.AppCenter;
 using Microsoft.AppCenter.Analytics;
 using Microsoft.AppCenter.Crashes;
+using Microsoft.AppCenter.Distribute;
 
 namespace BayonetTickets_Android
 {
@@ -38,8 +39,8 @@ namespace BayonetTickets_Android
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
-            AppCenter.Start("576b46f7-5eb3-4a49-88fa-309341fb2054",
-                   typeof(Analytics), typeof(Crashes));
+            AppCenter.Start("576b46f7-5eb3-4a49-88fa-309341fb2054", typeof(Distribute), typeof(Analytics), typeof(Crashes));
+            Distribute.SetEnabledForDebuggableBuild(true);
             base.OnCreate(savedInstanceState);
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
             SetContentView(Resource.Layout.activity_main);

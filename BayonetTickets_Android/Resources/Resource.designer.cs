@@ -25,6 +25,27 @@ namespace BayonetTickets_Android
 		
 		public static void UpdateIdValues()
 		{
+			global::Microsoft.AppCenter.Distribute.Resource.String.appcenter_distribute_dialog_actioned_on_disabled_toast = global::BayonetTickets_Android.Resource.String.appcenter_distribute_dialog_actioned_on_disabled_toast;
+			global::Microsoft.AppCenter.Distribute.Resource.String.appcenter_distribute_download_progress_number_format = global::BayonetTickets_Android.Resource.String.appcenter_distribute_download_progress_number_format;
+			global::Microsoft.AppCenter.Distribute.Resource.String.appcenter_distribute_downloading_error = global::BayonetTickets_Android.Resource.String.appcenter_distribute_downloading_error;
+			global::Microsoft.AppCenter.Distribute.Resource.String.appcenter_distribute_downloading_mandatory_update = global::BayonetTickets_Android.Resource.String.appcenter_distribute_downloading_mandatory_update;
+			global::Microsoft.AppCenter.Distribute.Resource.String.appcenter_distribute_downloading_update = global::BayonetTickets_Android.Resource.String.appcenter_distribute_downloading_update;
+			global::Microsoft.AppCenter.Distribute.Resource.String.appcenter_distribute_install = global::BayonetTickets_Android.Resource.String.appcenter_distribute_install;
+			global::Microsoft.AppCenter.Distribute.Resource.String.appcenter_distribute_install_ready_message = global::BayonetTickets_Android.Resource.String.appcenter_distribute_install_ready_message;
+			global::Microsoft.AppCenter.Distribute.Resource.String.appcenter_distribute_install_ready_title = global::BayonetTickets_Android.Resource.String.appcenter_distribute_install_ready_title;
+			global::Microsoft.AppCenter.Distribute.Resource.String.appcenter_distribute_notification_category = global::BayonetTickets_Android.Resource.String.appcenter_distribute_notification_category;
+			global::Microsoft.AppCenter.Distribute.Resource.String.appcenter_distribute_unknown_sources_dialog_message = global::BayonetTickets_Android.Resource.String.appcenter_distribute_unknown_sources_dialog_message;
+			global::Microsoft.AppCenter.Distribute.Resource.String.appcenter_distribute_unknown_sources_dialog_settings = global::BayonetTickets_Android.Resource.String.appcenter_distribute_unknown_sources_dialog_settings;
+			global::Microsoft.AppCenter.Distribute.Resource.String.appcenter_distribute_update_dialog_download = global::BayonetTickets_Android.Resource.String.appcenter_distribute_update_dialog_download;
+			global::Microsoft.AppCenter.Distribute.Resource.String.appcenter_distribute_update_dialog_message_mandatory = global::BayonetTickets_Android.Resource.String.appcenter_distribute_update_dialog_message_mandatory;
+			global::Microsoft.AppCenter.Distribute.Resource.String.appcenter_distribute_update_dialog_message_optional = global::BayonetTickets_Android.Resource.String.appcenter_distribute_update_dialog_message_optional;
+			global::Microsoft.AppCenter.Distribute.Resource.String.appcenter_distribute_update_dialog_postpone = global::BayonetTickets_Android.Resource.String.appcenter_distribute_update_dialog_postpone;
+			global::Microsoft.AppCenter.Distribute.Resource.String.appcenter_distribute_update_dialog_title = global::BayonetTickets_Android.Resource.String.appcenter_distribute_update_dialog_title;
+			global::Microsoft.AppCenter.Distribute.Resource.String.appcenter_distribute_update_dialog_view_release_notes = global::BayonetTickets_Android.Resource.String.appcenter_distribute_update_dialog_view_release_notes;
+			global::Microsoft.AppCenter.Distribute.Resource.String.appcenter_distribute_update_failed_dialog_ignore = global::BayonetTickets_Android.Resource.String.appcenter_distribute_update_failed_dialog_ignore;
+			global::Microsoft.AppCenter.Distribute.Resource.String.appcenter_distribute_update_failed_dialog_message = global::BayonetTickets_Android.Resource.String.appcenter_distribute_update_failed_dialog_message;
+			global::Microsoft.AppCenter.Distribute.Resource.String.appcenter_distribute_update_failed_dialog_reinstall = global::BayonetTickets_Android.Resource.String.appcenter_distribute_update_failed_dialog_reinstall;
+			global::Microsoft.AppCenter.Distribute.Resource.String.appcenter_distribute_update_failed_dialog_title = global::BayonetTickets_Android.Resource.String.appcenter_distribute_update_failed_dialog_title;
 			global::Plugin.Permissions.Resource.Attribute.alpha = global::BayonetTickets_Android.Resource.Attribute.alpha;
 			global::Plugin.Permissions.Resource.Attribute.coordinatorLayoutStyle = global::BayonetTickets_Android.Resource.Attribute.coordinatorLayoutStyle;
 			global::Plugin.Permissions.Resource.Attribute.font = global::BayonetTickets_Android.Resource.Attribute.font;
@@ -9749,53 +9770,116 @@ namespace BayonetTickets_Android
 			// aapt resource value: 0x7F0E0029
 			public const int appbar_scrolling_view_behavior = 2131623977;
 			
+			// aapt resource value: 0x7F0E002A
+			public const int appcenter_distribute_dialog_actioned_on_disabled_toast = 2131623978;
+			
+			// aapt resource value: 0x7F0E002C
+			public const int appcenter_distribute_downloading_error = 2131623980;
+			
+			// aapt resource value: 0x7F0E002D
+			public const int appcenter_distribute_downloading_mandatory_update = 2131623981;
+			
+			// aapt resource value: 0x7F0E002E
+			public const int appcenter_distribute_downloading_update = 2131623982;
+			
+			// aapt resource value: 0x7F0E002B
+			public const int appcenter_distribute_download_progress_number_format = 2131623979;
+			
+			// aapt resource value: 0x7F0E002F
+			public const int appcenter_distribute_install = 2131623983;
+			
+			// aapt resource value: 0x7F0E0030
+			public const int appcenter_distribute_install_ready_message = 2131623984;
+			
+			// aapt resource value: 0x7F0E0031
+			public const int appcenter_distribute_install_ready_title = 2131623985;
+			
+			// aapt resource value: 0x7F0E0032
+			public const int appcenter_distribute_notification_category = 2131623986;
+			
+			// aapt resource value: 0x7F0E0033
+			public const int appcenter_distribute_unknown_sources_dialog_message = 2131623987;
+			
+			// aapt resource value: 0x7F0E0034
+			public const int appcenter_distribute_unknown_sources_dialog_settings = 2131623988;
+			
+			// aapt resource value: 0x7F0E0035
+			public const int appcenter_distribute_update_dialog_download = 2131623989;
+			
+			// aapt resource value: 0x7F0E0036
+			public const int appcenter_distribute_update_dialog_message_mandatory = 2131623990;
+			
+			// aapt resource value: 0x7F0E0037
+			public const int appcenter_distribute_update_dialog_message_optional = 2131623991;
+			
+			// aapt resource value: 0x7F0E0038
+			public const int appcenter_distribute_update_dialog_postpone = 2131623992;
+			
+			// aapt resource value: 0x7F0E0039
+			public const int appcenter_distribute_update_dialog_title = 2131623993;
+			
+			// aapt resource value: 0x7F0E003A
+			public const int appcenter_distribute_update_dialog_view_release_notes = 2131623994;
+			
+			// aapt resource value: 0x7F0E003B
+			public const int appcenter_distribute_update_failed_dialog_ignore = 2131623995;
+			
+			// aapt resource value: 0x7F0E003C
+			public const int appcenter_distribute_update_failed_dialog_message = 2131623996;
+			
+			// aapt resource value: 0x7F0E003D
+			public const int appcenter_distribute_update_failed_dialog_reinstall = 2131623997;
+			
+			// aapt resource value: 0x7F0E003E
+			public const int appcenter_distribute_update_failed_dialog_title = 2131623998;
+			
 			// aapt resource value: 0x7F0E0028
 			public const int app_name = 2131623976;
 			
-			// aapt resource value: 0x7F0E002A
-			public const int bottom_sheet_behavior = 2131623978;
+			// aapt resource value: 0x7F0E003F
+			public const int bottom_sheet_behavior = 2131623999;
 			
-			// aapt resource value: 0x7F0E002B
-			public const int character_counter_content_description = 2131623979;
+			// aapt resource value: 0x7F0E0040
+			public const int character_counter_content_description = 2131624000;
 			
-			// aapt resource value: 0x7F0E002C
-			public const int character_counter_pattern = 2131623980;
+			// aapt resource value: 0x7F0E0041
+			public const int character_counter_pattern = 2131624001;
 			
-			// aapt resource value: 0x7F0E002D
-			public const int fab_transformation_scrim_behavior = 2131623981;
+			// aapt resource value: 0x7F0E0042
+			public const int fab_transformation_scrim_behavior = 2131624002;
 			
-			// aapt resource value: 0x7F0E002E
-			public const int fab_transformation_sheet_behavior = 2131623982;
+			// aapt resource value: 0x7F0E0043
+			public const int fab_transformation_sheet_behavior = 2131624003;
 			
-			// aapt resource value: 0x7F0E002F
-			public const int hide_bottom_view_on_scroll_behavior = 2131623983;
+			// aapt resource value: 0x7F0E0044
+			public const int hide_bottom_view_on_scroll_behavior = 2131624004;
 			
-			// aapt resource value: 0x7F0E0030
-			public const int mtrl_chip_close_icon_content_description = 2131623984;
+			// aapt resource value: 0x7F0E0045
+			public const int mtrl_chip_close_icon_content_description = 2131624005;
 			
-			// aapt resource value: 0x7F0E0031
-			public const int overflow_tab_title = 2131623985;
+			// aapt resource value: 0x7F0E0046
+			public const int overflow_tab_title = 2131624006;
 			
-			// aapt resource value: 0x7F0E0032
-			public const int password_toggle_content_description = 2131623986;
+			// aapt resource value: 0x7F0E0047
+			public const int password_toggle_content_description = 2131624007;
 			
-			// aapt resource value: 0x7F0E0033
-			public const int path_password_eye = 2131623987;
+			// aapt resource value: 0x7F0E0048
+			public const int path_password_eye = 2131624008;
 			
-			// aapt resource value: 0x7F0E0034
-			public const int path_password_eye_mask_strike_through = 2131623988;
+			// aapt resource value: 0x7F0E0049
+			public const int path_password_eye_mask_strike_through = 2131624009;
 			
-			// aapt resource value: 0x7F0E0035
-			public const int path_password_eye_mask_visible = 2131623989;
+			// aapt resource value: 0x7F0E004A
+			public const int path_password_eye_mask_visible = 2131624010;
 			
-			// aapt resource value: 0x7F0E0036
-			public const int path_password_strike_through = 2131623990;
+			// aapt resource value: 0x7F0E004B
+			public const int path_password_strike_through = 2131624011;
 			
-			// aapt resource value: 0x7F0E0037
-			public const int search_menu_title = 2131623991;
+			// aapt resource value: 0x7F0E004C
+			public const int search_menu_title = 2131624012;
 			
-			// aapt resource value: 0x7F0E0038
-			public const int status_bar_notification_info_overflow = 2131623992;
+			// aapt resource value: 0x7F0E004D
+			public const int status_bar_notification_info_overflow = 2131624013;
 			
 			static String()
 			{
