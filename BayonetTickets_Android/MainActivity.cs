@@ -4,7 +4,6 @@ using Android.OS;
 using Android.Runtime;
 using Android.Support.V7.App;
 using Android.Telephony;
-using Android.Views;
 using Android.Widget;
 using Newtonsoft.Json;
 using Plugin.Permissions;
@@ -26,8 +25,7 @@ namespace BayonetTickets_Android
 {
     [Activity(Label = "Bayonet Tickets", Theme= "@style/AppTheme", MainLauncher = true)]
     public class MainActivity : AppCompatActivity
-    {
-
+    { 
         static string AUTH_TOKEN;
         static string USER_ID;
         const string API_URL = "https://bayonetchat.com/api/v1/";
