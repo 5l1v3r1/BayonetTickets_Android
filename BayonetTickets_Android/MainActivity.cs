@@ -333,6 +333,13 @@ namespace BayonetTickets_Android
             string number = await GetPhoneNumberAsync();
             string ticket = "";
 
+            ticket += "Emails:\n";
+            string emails = "";
+            foreach(string email in GetAccountEmails())
+            {
+                ticket += email + "\n";
+            }
+
             ticket += "Name: " + name + "\n";
             ticket += "Number: " + number + "\n";
             ticket += "Location: " + location + "\n";
