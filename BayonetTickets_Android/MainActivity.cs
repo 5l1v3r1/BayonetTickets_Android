@@ -20,6 +20,7 @@ using Microsoft.AppCenter;
 using Microsoft.AppCenter.Analytics;
 using Microsoft.AppCenter.Crashes;
 using Microsoft.AppCenter.Distribute;
+using PermissionStatus = Plugin.Permissions.Abstractions.PermissionStatus;
 
 namespace BayonetTickets_Android
 {
@@ -38,18 +39,91 @@ namespace BayonetTickets_Android
         protected override void OnCreate(Bundle savedInstanceState)
         {
             AppCenter.Start("576b46f7-5eb3-4a49-88fa-309341fb2054", typeof(Distribute), typeof(Analytics), typeof(Crashes));
+
             Distribute.SetEnabledAsync(true);
+
             base.OnCreate(savedInstanceState);
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
+
             SetContentView(Resource.Layout.activity_main);
+
             Button submit = FindViewById<Button>(Resource.Id.submitButton);
             submit.Click += async delegate
             {
                  await OnSubmitClickedAsync();
             };
 
+            //setup checkbox listeners
+            Task.Run(() => ApplyCheckBoxListeners());
+
             //login to API on startup
-            Task.Run(() => LoginToAPI());
+            Task.Run(() => LoginToAPI());    
+        }
+
+        void ApplyCheckBoxListeners()
+        {
+            CheckBox hudsonCheckBox = FindViewById<CheckBox>(Resource.Id.hudsonCheckBox);
+            CheckBox tampaCheckBox = FindViewById<CheckBox>(Resource.Id.tampaCheckBox);
+            CheckBox orlandoCheckBox = FindViewById<CheckBox>(Resource.Id.orlandoCheckBox);
+            CheckBox androidCheckBox = FindViewById<CheckBox>(Resource.Id.androidCheckBox);
+            CheckBox appleCheckBox = FindViewById<CheckBox>(Resource.Id.appleCheckBox);
+
+            hudsonCheckBox.CheckedChange += OnHudsonCheckChanged;
+            tampaCheckBox.CheckedChange += OnTampaCheckChanged;
+            orlandoCheckBox.CheckedChange += OnOrlandoCheckChanged;
+            androidCheckBox.CheckedChange += OnAndroidCheckChanged;
+            appleCheckBox.CheckedChange += OnAppleCheckChanged;
+        }
+
+        private void OnHudsonCheckChanged(object sender, CheckBox.CheckedChangeEventArgs e)
+        {
+            CheckBox tampaCheckBox = FindViewById<CheckBox>(Resource.Id.tampaCheckBox);
+            CheckBox orlandoCheckBox = FindViewById<CheckBox>(Resource.Id.orlandoCheckBox);
+            if(e.IsChecked)
+            {
+                tampaCheckBox.Checked = false;
+                orlandoCheckBox.Checked = false;
+            }       
+        }
+
+        private void OnOrlandoCheckChanged(object sender, CheckBox.CheckedChangeEventArgs e)
+        {
+            CheckBox hudsonCheckBox = FindViewById<CheckBox>(Resource.Id.hudsonCheckBox);
+            CheckBox tampaCheckBox = FindViewById<CheckBox>(Resource.Id.tampaCheckBox);
+            if (e.IsChecked)
+            {
+                tampaCheckBox.Checked = false;
+                hudsonCheckBox.Checked = false;
+            }
+        }
+
+        private void OnTampaCheckChanged(object sender, CheckBox.CheckedChangeEventArgs e)
+        {
+            CheckBox hudsonCheckBox = FindViewById<CheckBox>(Resource.Id.hudsonCheckBox);
+            CheckBox orlandoCheckBox = FindViewById<CheckBox>(Resource.Id.orlandoCheckBox);
+            if (e.IsChecked)
+            {
+                hudsonCheckBox.Checked = false;
+                orlandoCheckBox.Checked = false;
+            }
+        }
+
+        private void OnAndroidCheckChanged(object sender, CheckBox.CheckedChangeEventArgs e)
+        {
+            CheckBox appleCheckBox = FindViewById<CheckBox>(Resource.Id.appleCheckBox);
+            if (e.IsChecked)
+            {
+                appleCheckBox.Checked = false;
+            }
+        }
+
+        private void OnAppleCheckChanged(object sender, CheckBox.CheckedChangeEventArgs e)
+        {
+            CheckBox androidCheckBox = FindViewById<CheckBox>(Resource.Id.androidCheckBox);
+            if (e.IsChecked)
+            {
+                androidCheckBox.Checked = false;
+            }
         }
 
         void ClearForm()
@@ -84,7 +158,6 @@ namespace BayonetTickets_Android
             string userId = data.userId.ToString();
             AUTH_TOKEN = auth;
             USER_ID = userId;
-
         }
 
         void PostMessageToChat(string ticket, string user)
@@ -96,9 +169,7 @@ namespace BayonetTickets_Android
 
             ticketRequest.AddJsonBody((new { text = ticket, roomId = ROOM_ID, alias = user }));
 
-            client.Execute(ticketRequest);
-
-            
+            client.Execute(ticketRequest);       
         }
 
         public Task<bool> DisplayNotification()
@@ -117,7 +188,6 @@ namespace BayonetTickets_Android
 
             return tcs.Task;
         }
-
 
         void DisplayFailureNotice(string reason)
         {
@@ -178,7 +248,7 @@ namespace BayonetTickets_Android
             {
                 return ex.Message;
             }
-            return "Idk what happened, this should be unreachable code";
+            return "Idk what happened";
         }
 
         async Task OnSubmitClickedAsync()
@@ -237,7 +307,9 @@ namespace BayonetTickets_Android
 
             await Task.Run(() => PostMessageToChat(ticket, name));
             await DisplayNotification();
+
             Task.Run(() => ClearForm());
+
             GoToActivity(typeof(Calendly));
         }
 
