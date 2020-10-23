@@ -21,6 +21,7 @@ using Microsoft.AppCenter.Analytics;
 using Microsoft.AppCenter.Crashes;
 using Microsoft.AppCenter.Distribute;
 using PermissionStatus = Plugin.Permissions.Abstractions.PermissionStatus;
+using Xamarin.Essentials;
 
 namespace BayonetTickets_Android
 {
@@ -47,17 +48,29 @@ namespace BayonetTickets_Android
 
             SetContentView(Resource.Layout.activity_main);
 
-            Button submit = FindViewById<Button>(Resource.Id.submitButton);
-            submit.Click += async delegate
-            {
-                 await OnSubmitClickedAsync();
-            };
+            //setup button events
+            Task.Run(() => ApplyButtonListeners());
 
             //setup checkbox listeners
             Task.Run(() => ApplyCheckBoxListeners());
 
             //login to API on startup
             Task.Run(() => LoginToAPI());    
+        }
+
+        void ApplyButtonListeners()
+        {
+            Button submit = FindViewById<Button>(Resource.Id.submitButton);
+            submit.Click += async delegate
+            {
+                await OnSubmitClickedAsync();
+            };
+
+            Button call = FindViewById<Button>(Resource.Id.callButton);
+            call.Click += async delegate
+            {
+                await OnCallButtonClick();
+            };
         }
 
         void ApplyCheckBoxListeners()
@@ -131,7 +144,6 @@ namespace BayonetTickets_Android
             CheckBox hudsonCheckBox = FindViewById<CheckBox>(Resource.Id.hudsonCheckBox);
             CheckBox tampaCheckBox = FindViewById<CheckBox>(Resource.Id.tampaCheckBox);
             CheckBox orlandoCheckBox = FindViewById<CheckBox>(Resource.Id.orlandoCheckBox);
-
             CheckBox androidCheckBox = FindViewById<CheckBox>(Resource.Id.androidCheckBox);
             CheckBox appleCheckBox = FindViewById<CheckBox>(Resource.Id.appleCheckBox);
 
@@ -249,6 +261,26 @@ namespace BayonetTickets_Android
                 return ex.Message;
             }
             return "Idk what happened";
+        }
+
+        async Task OnCallButtonClick()
+        {
+            try
+            {
+                PhoneDialer.Open("7279335322");
+            }
+            catch (ArgumentNullException anEx)
+            {
+                DisplayFailureNotice(anEx.Message);
+            }
+            catch (FeatureNotSupportedException ex)
+            {
+                DisplayFailureNotice(ex.Message);
+            }
+            catch (Exception ex)
+            {
+                DisplayFailureNotice(ex.Message);
+            }
         }
 
         async Task OnSubmitClickedAsync()
