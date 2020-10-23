@@ -246,6 +246,49 @@ namespace BayonetTickets_Android
             StartActivity(myActivity);
         }
 
+        void OnHudsonClicked(object sender, CheckedChangedEventArgs e)
+        {
+            CheckBox tampaCheckBox = FindViewById<CheckBox>(Resource.Id.tampaCheckBox);
+            CheckBox orlandoCheckBox = FindViewById<CheckBox>(Resource.Id.orlandoCheckBox);
+            if (tampaCheckBox.Checked)
+                tampaCheckBox.Checked = false;
+            if (orlandoCheckBox.Checked)
+                orlandoCheckBox.Checked = false;
+        }
+
+        void OnTampaClicked(object sender, CheckedChangedEventArgs e)
+        {
+            CheckBox hudsonCheckBox = FindViewById<CheckBox>(Resource.Id.hudsonCheckBox);
+            CheckBox orlandoCheckBox = FindViewById<CheckBox>(Resource.Id.orlandoCheckBox);
+            if (hudsonCheckBox.Checked)
+                hudsonCheckBox.Checked = false;
+            if (orlandoCheckBox.Checked)
+                orlandoCheckBox.Checked = false;
+        }
+
+        void OnOrlandoClicked(object sender, CheckedChangedEventArgs e)
+        {
+            CheckBox hudsonCheckBox = FindViewById<CheckBox>(Resource.Id.hudsonCheckBox);
+            CheckBox tampaCheckBox = FindViewById<CheckBox>(Resource.Id.tampaCheckBox);
+            if (hudsonCheckBox.Checked)
+                hudsonCheckBox.Checked = false;
+            if (tampaCheckBox.Checked)
+                tampaCheckBox.Checked = false;
+        }
+
+        void OnAndroidClicked(object sender, CheckedChangedEventArgs e)
+        {
+            CheckBox appleCheckBox = FindViewById<CheckBox>(Resource.Id.appleCheckBox);
+            if (appleCheckBox.Checked)
+                appleCheckBox.Checked = false;
+        }
+
+        void OnAppleClicked(object sender, CheckedChangedEventArgs e)
+        {
+            CheckBox androidCheckBox = FindViewById<CheckBox>(Resource.Id.androidCheckBox);
+            if (androidCheckBox.Checked)
+                androidCheckBox.Checked = false;
+        }
 
         public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Android.Content.PM.Permission[] grantResults)
         {

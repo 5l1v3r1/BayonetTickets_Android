@@ -42,16 +42,19 @@
             android:text="Hudson"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
+            android:onClick="OnHudsonClicked"
             android:id="@+id/hudsonCheckBox" />
         <CheckBox
             android:text="Tampa"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
+            android:onClick="OnTampaClicked"
             android:id="@+id/tampaCheckBox" />
         <CheckBox
             android:text="Orlando"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
+            android:onClick="OnOrlandoClicked"
             android:id="@+id/orlandoCheckBox" />
     </LinearLayout>
     <TextView
@@ -71,11 +74,13 @@
             android:text="Android"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
+            android:onClick="OnAndroidClicked"
             android:id="@+id/androidCheckBox" />
         <CheckBox
             android:text="Apple"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
+            android:onClick="OnAppleClicked"
             android:id="@+id/appleCheckBox" />
     </LinearLayout>
 
