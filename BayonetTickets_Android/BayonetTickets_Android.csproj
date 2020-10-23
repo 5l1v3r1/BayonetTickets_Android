@@ -60,11 +60,7 @@
     <EnableLLVM>false</EnableLLVM>
     <AndroidEnableProfiledAot>false</AndroidEnableProfiledAot>
     <BundleAssemblies>false</BundleAssemblies>
-    <AndroidKeyStore>true</AndroidKeyStore>
-    <AndroidSigningKeyStore>C:\Users\Wesley\AppData\Local\Xamarin\Mono for Android\Keystore\BayonetTickets\BayonetTickets.keystore</AndroidSigningKeyStore>
-    <AndroidSigningStorePass>2Manycats</AndroidSigningStorePass>
-    <AndroidSigningKeyAlias>BayonetTickets</AndroidSigningKeyAlias>
-    <AndroidSigningKeyPass>2Manycats</AndroidSigningKeyPass>
+    <AndroidKeyStore>false</AndroidKeyStore>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.CSharp" />
