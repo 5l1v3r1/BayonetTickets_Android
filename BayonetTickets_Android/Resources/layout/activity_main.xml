@@ -104,7 +104,8 @@
     <Space
         android:layout_width="match_parent"
         android:layout_height="64.0dp"
-        android:id="@+id/space5" />
+        android:id="@+id/space5"
+        android:layout_marginTop="2.0dp" />
     <Button
         android:text="Call IT Department"
         android:layout_width="match_parent"
