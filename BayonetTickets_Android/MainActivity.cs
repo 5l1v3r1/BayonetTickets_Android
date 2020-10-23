@@ -342,6 +342,8 @@ namespace BayonetTickets_Android
             await Task.Run(() => PostMessageToChat(ticket, name));
             await DisplayNotification();
 
+            Analytics.TrackEvent("Ticket Pushed");
+            
             Task.Run(() => ClearForm());
 
             GoToActivity(typeof(Calendly));
