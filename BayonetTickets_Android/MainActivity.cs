@@ -44,7 +44,7 @@ namespace BayonetTickets_Android
             Distribute.SetEnabledAsync(true);
             Distribute.SetEnabledForDebuggableBuild(true);
             Distribute.CheckForUpdate();
-
+            Analytics.TrackEvent("Application Launched - Update Checked");
             base.OnCreate(savedInstanceState);
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
 
