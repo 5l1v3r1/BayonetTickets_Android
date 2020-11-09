@@ -310,7 +310,7 @@ namespace BayonetTickets_Android
                 DisplayFailureNotice("No device type checked.");
                 return;
             }
-
+            
             //no name
             string name = empName.Text;
             if(name.Equals(""))
