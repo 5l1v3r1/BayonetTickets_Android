@@ -7,7 +7,7 @@ namespace BayonetTickets_Android
     {
         public Display()
         {
-
+            //default constructor, no real use
         }
 
         public Task<bool> DisplayNotification()
