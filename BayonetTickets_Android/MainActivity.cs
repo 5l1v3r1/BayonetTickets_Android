@@ -28,10 +28,6 @@ namespace BayonetTickets_Android
         protected override void OnCreate(Bundle savedInstanceState)
         {
             AppCenter.Start("576b46f7-5eb3-4a49-88fa-309341fb2054", typeof(Analytics), typeof(Crashes));
-
-            //Distribute.SetEnabledAsync(true);
-            //Distribute.SetEnabledForDebuggableBuild(true);
-            //Distribute.CheckForUpdate();
             Analytics.TrackEvent("Application Launched");
             base.OnCreate(savedInstanceState);
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
