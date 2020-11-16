@@ -103,12 +103,22 @@
         android:layout_height="wrap_content"/>
     <Space
         android:layout_width="match_parent"
-        android:layout_height="64.0dp"
+        android:layout_height="21.5dp"
         android:id="@+id/space5"
-        android:layout_marginTop="2.0dp" />
+        android:layout_marginTop="2.0dp"
+        android:layout_marginBottom="0.0dp" />
     <Button
         android:text="Call IT Department"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/callButton" />
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="19.0dp"
+        android:id="@+id/space6" />
+    <Button
+        android:text="Call Mechanic Shop"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/mechanicButton" />
 </LinearLayout>
