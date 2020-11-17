@@ -16,15 +16,15 @@ namespace BayonetTickets_Android
             }
             catch (ArgumentNullException anEx)
             {
-               main.DisplayFailureNotice(anEx.Message);
+               Display.DisplayFailureNotice(anEx.Message);
             }
             catch (FeatureNotSupportedException ex)
             {
-                main.DisplayFailureNotice(ex.Message);
+                Display.DisplayFailureNotice(ex.Message);
             }
             catch (Exception ex)
             {
-                main.DisplayFailureNotice(ex.Message);
+                Display.DisplayFailureNotice(ex.Message);
             }
         }
 
