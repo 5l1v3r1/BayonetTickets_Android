@@ -257,14 +257,14 @@ namespace BayonetTickets_Android
             //no location
             if (!hudsonCheckBox.Checked && !tampaCheckBox.Checked && !orlandoCheckBox.Checked)
             {
-                DisplayFailureNotice("No location checked.");
+                await DisplayFailureNotice("No location checked.");
                 return;
             }
 
             //no device type
             if (!appleCheckBox.Checked && !androidCheckBox.Checked)
             {
-                DisplayFailureNotice("No device type checked.");
+                await DisplayFailureNotice("No device type checked.");
                 return;
             }
             
@@ -272,7 +272,7 @@ namespace BayonetTickets_Android
             string name = empName.Text;
             if(name.Equals(""))
             {
-                DisplayFailureNotice("No employee name specified.");
+                await DisplayFailureNotice("No employee name specified.");
                 return;
             }
 
@@ -281,7 +281,7 @@ namespace BayonetTickets_Android
             //no issue
             if(issue.Equals(""))
             {
-                DisplayFailureNotice("No issue entered.");
+                await DisplayFailureNotice("No issue entered.");
                 return;
             }
 
@@ -299,7 +299,7 @@ namespace BayonetTickets_Android
             await Task.Run(() => BayonetChat.PostMessageToChat(ticket, name));
             await DisplayNotification();
 
-            Analytics.TrackEvent("Ticket Pushed");
+            Analytics.TrackEvent("Ticket Submitted");
             
             Task.Run(() => ClearForm());
 
