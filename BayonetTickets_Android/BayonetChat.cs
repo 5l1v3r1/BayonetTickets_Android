@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using Microsoft.AppCenter.Analytics;
+using Newtonsoft.Json;
 using RestSharp;
 using RestSharp.Authenticators;
 
@@ -16,6 +17,7 @@ namespace BayonetTickets_Android
 
         public static void LoginToAPI()
         {
+            Analytics.TrackEvent("Logged into API");
             client.Authenticator = new SimpleAuthenticator("user", BOT_NAME, "password", BOT_PASSWORD);
             var request = new RestRequest("login", Method.POST);
             var response = client.Execute(request);

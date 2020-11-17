@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AppCenter.Analytics;
+using System;
 using System.Threading.Tasks;
 using Xamarin.Essentials;
 
@@ -9,6 +10,7 @@ namespace BayonetTickets_Android
         public static Display disp = new Display();
         public static async Task OnCallButtonClick()
         {
+            Analytics.TrackEvent("Call IT Button Pressed");
             try
             {
                 PhoneDialer.Open("7279335322");
@@ -29,6 +31,7 @@ namespace BayonetTickets_Android
 
         public static async Task OnCallMechanicClick()
         {
+            Analytics.TrackEvent("Call Mechanic Button Pressed");
             try
             {
                 PhoneDialer.Open("");
@@ -49,6 +52,7 @@ namespace BayonetTickets_Android
 
         public static async Task OnCallSafetyButtonClick()
         {
+            Analytics.TrackEvent("Call Safety Button Pressed");
             try
             {
                 PhoneDialer.Open("3529427031");
