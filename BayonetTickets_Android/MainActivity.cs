@@ -16,6 +16,7 @@ using Microsoft.AppCenter.Analytics;
 using Microsoft.AppCenter.Crashes;
 using PermissionStatus = Plugin.Permissions.Abstractions.PermissionStatus;
 using Button = Android.Widget.Button;
+using AlertDialog = Android.App.AlertDialog;
 
 namespace BayonetTickets_Android
 {
@@ -65,7 +66,6 @@ namespace BayonetTickets_Android
 
         void ApplyButtonListeners()
         {
-            MainActivity main = new MainActivity();
             Button submit = FindViewById<Button>(Resource.Id.submitButton);
             submit.Click += async delegate
             {
@@ -75,7 +75,7 @@ namespace BayonetTickets_Android
             Button call = FindViewById<Button>(Resource.Id.callButton);
             call.Click += async delegate
             {
-                string result = await Display.DisplayConfirmationNotice("IT Department");
+                string result = await DisplayConfirmationNotice("IT Department");
                 if (result.Equals("OK"))
                     await Dialer.OnCallButtonClick();
             };
@@ -83,7 +83,7 @@ namespace BayonetTickets_Android
             Button mechanic = FindViewById<Button>(Resource.Id.mechanicButton);
             mechanic.Click += async delegate
             {
-                string result = await Display.DisplayConfirmationNotice("Mechanic Shop");
+                string result = await DisplayConfirmationNotice("Mechanic Shop");
                 if (result.Equals("OK"))
                     await Dialer.OnCallMechanicClick();
             };
@@ -91,7 +91,7 @@ namespace BayonetTickets_Android
             Button safety = FindViewById<Button>(Resource.Id.safetyButton);
             safety.Click += async delegate
             {
-                string result = await Display.DisplayConfirmationNotice("Safety Coordinator");
+                string result = await DisplayConfirmationNotice("Safety Coordinator");
                 if (result.Equals("OK"))
                     await Dialer.OnCallSafetyButtonClick();
             };
@@ -162,6 +162,57 @@ namespace BayonetTickets_Android
             }
         }
 
+        public static Task<bool> DisplayNotification()
+        {
+            MainActivity main = new MainActivity();
+            var tcs = new TaskCompletionSource<bool>();
+            string message = "Your ticket has been submitted." + "\n\n" + "Please press ok and schedule a date and time to meet with the IT Department.";
+            AlertDialog.Builder alert = new AlertDialog.Builder(main).SetPositiveButton("OK", (sender, args) =>
+            {
+                tcs.SetResult(true);
+            })
+            .SetTitle("Ticket Submitted")
+            .SetMessage(message);
+
+            Dialog dialog = alert.Create();
+            dialog.Show();
+
+            return tcs.Task;
+        }
+
+        public Task<string> DisplayConfirmationNotice(string reason)
+        {
+            var tcs = new TaskCompletionSource<string>();
+            AlertDialog.Builder alert = new AlertDialog.Builder(this);
+            alert.SetTitle("Open Phone Dialer");
+            alert.SetMessage("You are trying to call the " + reason + ".\nIf this is correct, press Call.\nIf not, press Cancel.");
+            alert.SetPositiveButton("Call", (senderAlert, args) => {
+                tcs.SetResult("OK");
+            });
+            alert.SetNegativeButton("Cancel", (senderAlert, args) => {
+                tcs.SetResult("Cancel");
+            });
+            Dialog dialog = alert.Create();
+            dialog.Show();
+
+            return tcs.Task;
+        }
+
+        public Task<string> DisplayFailureNotice(string reason)
+        {
+            var tcs = new TaskCompletionSource<string>();
+            AlertDialog.Builder alert = new AlertDialog.Builder(this);
+            alert.SetTitle("Not Enough Information");
+            alert.SetMessage(reason);
+            alert.SetPositiveButton("OK", (senderAlert, args) => {
+                tcs.SetResult("OK");
+            });
+            Dialog dialog = alert.Create();
+            dialog.Show();
+
+            return tcs.Task;
+        }
+
         string DetermineLocation(CheckBox hudson, CheckBox tampa, CheckBox orlando)
         {
             if (hudson.Checked)
@@ -230,14 +281,14 @@ namespace BayonetTickets_Android
             //no location
             if (!hudsonCheckBox.Checked && !tampaCheckBox.Checked && !orlandoCheckBox.Checked)
             {
-                await Display.DisplayFailureNotice("No location checked.");
+                await DisplayFailureNotice("No location checked.");
                 return;
             }
 
             //no device type
             if (!appleCheckBox.Checked && !androidCheckBox.Checked)
             {
-                await Display.DisplayFailureNotice("No device type checked.");
+                await DisplayFailureNotice("No device type checked.");
                 return;
             }
             
@@ -245,7 +296,7 @@ namespace BayonetTickets_Android
             string name = empName.Text;
             if(name.Equals(""))
             {
-                await Display.DisplayFailureNotice("No employee name specified.");
+                await DisplayFailureNotice("No employee name specified.");
                 return;
             }
 
@@ -254,7 +305,7 @@ namespace BayonetTickets_Android
             //no issue
             if(issue.Equals(""))
             {
-                await Display.DisplayFailureNotice("No issue entered.");
+                await DisplayFailureNotice("No issue entered.");
                 return;
             }
 
@@ -270,7 +321,7 @@ namespace BayonetTickets_Android
             ticket += "Issue: " + issue + "\n";
 
             await Task.Run(() => BayonetChat.PostMessageToChat(ticket, name));
-            await Display.DisplayNotification();
+            await DisplayNotification();
 
             Analytics.TrackEvent("Ticket Submitted");
             
