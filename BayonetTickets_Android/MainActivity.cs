@@ -63,8 +63,6 @@ namespace BayonetTickets_Android
             issueBox.Text = "";
         }
 
-       
-
         string DetermineLocation(CheckBox hudson, CheckBox tampa, CheckBox orlando)
         {
             if (hudson.Checked)
@@ -115,8 +113,9 @@ namespace BayonetTickets_Android
             {
                 return ex.Message;
             }
-            return "Idk what happened";
+            return "Unknown Error";
         }
+
         public async Task OnSubmitClickedAsync()
         {
             CheckBox hudsonCheckBox = FindViewById<CheckBox>(Resource.Id.hudsonCheckBox);
