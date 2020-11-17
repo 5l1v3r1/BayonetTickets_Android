@@ -35,114 +35,14 @@ namespace BayonetTickets_Android
             SetContentView(Resource.Layout.activity_main);
 
             //setup button events
-            Task.Run(() => ApplyButtonListeners());
+            Task.Run(() => Listener.ApplyButtonListeners());
 
             //setup checkbox listeners
-            Task.Run(() => ApplyCheckBoxListeners());
+            Task.Run(() => Listener.ApplyCheckBoxListeners());
 
             //login to API on startup
             Task.Run(() => BayonetChat.LoginToAPI());    
         }
-
-        void ApplyButtonListeners()
-        {
-            Button submit = FindViewById<Button>(Resource.Id.submitButton);
-            submit.Click += async delegate
-            {
-                await OnSubmitClickedAsync();
-            };
-
-            Button call = FindViewById<Button>(Resource.Id.callButton);
-            call.Click += async delegate
-            {
-                string result = await DisplayConfirmationNotice("IT Department");
-                if(result.Equals("OK"))
-                    await Dialer.OnCallButtonClick();
-            };
-
-            Button mechanic = FindViewById<Button>(Resource.Id.mechanicButton);
-            mechanic.Click += async delegate
-            {
-                string result = await DisplayConfirmationNotice("Mechanic Shop");
-                if (result.Equals("OK"))
-                    await Dialer.OnCallMechanicClick();
-            };
-
-            Button safety = FindViewById<Button>(Resource.Id.safetyButton);
-            safety.Click += async delegate
-            {
-                string result = await DisplayConfirmationNotice("Safety Coordinator");
-                if (result.Equals("OK"))
-                    await Dialer.OnCallSafetyButtonClick();
-            };
-        }
-
-        void ApplyCheckBoxListeners()
-        {
-            CheckBox hudsonCheckBox = FindViewById<CheckBox>(Resource.Id.hudsonCheckBox);
-            CheckBox tampaCheckBox = FindViewById<CheckBox>(Resource.Id.tampaCheckBox);
-            CheckBox orlandoCheckBox = FindViewById<CheckBox>(Resource.Id.orlandoCheckBox);
-            CheckBox androidCheckBox = FindViewById<CheckBox>(Resource.Id.androidCheckBox);
-            CheckBox appleCheckBox = FindViewById<CheckBox>(Resource.Id.appleCheckBox);
-
-            hudsonCheckBox.CheckedChange += OnHudsonCheckChanged;
-            tampaCheckBox.CheckedChange += OnTampaCheckChanged;
-            orlandoCheckBox.CheckedChange += OnOrlandoCheckChanged;
-            androidCheckBox.CheckedChange += OnAndroidCheckChanged;
-            appleCheckBox.CheckedChange += OnAppleCheckChanged;
-        }
-
-        private void OnHudsonCheckChanged(object sender, CheckBox.CheckedChangeEventArgs e)
-        {
-            CheckBox tampaCheckBox = FindViewById<CheckBox>(Resource.Id.tampaCheckBox);
-            CheckBox orlandoCheckBox = FindViewById<CheckBox>(Resource.Id.orlandoCheckBox);
-            if(e.IsChecked)
-            {
-                tampaCheckBox.Checked = false;
-                orlandoCheckBox.Checked = false;
-            }       
-        }
-
-        private void OnOrlandoCheckChanged(object sender, CheckBox.CheckedChangeEventArgs e)
-        {
-            CheckBox hudsonCheckBox = FindViewById<CheckBox>(Resource.Id.hudsonCheckBox);
-            CheckBox tampaCheckBox = FindViewById<CheckBox>(Resource.Id.tampaCheckBox);
-            if (e.IsChecked)
-            {
-                tampaCheckBox.Checked = false;
-                hudsonCheckBox.Checked = false;
-            }
-        }
-
-        private void OnTampaCheckChanged(object sender, CheckBox.CheckedChangeEventArgs e)
-        {
-            CheckBox hudsonCheckBox = FindViewById<CheckBox>(Resource.Id.hudsonCheckBox);
-            CheckBox orlandoCheckBox = FindViewById<CheckBox>(Resource.Id.orlandoCheckBox);
-            if (e.IsChecked)
-            {
-                hudsonCheckBox.Checked = false;
-                orlandoCheckBox.Checked = false;
-            }
-        }
-
-        private void OnAndroidCheckChanged(object sender, CheckBox.CheckedChangeEventArgs e)
-        {
-            CheckBox appleCheckBox = FindViewById<CheckBox>(Resource.Id.appleCheckBox);
-            if (e.IsChecked)
-            {
-                appleCheckBox.Checked = false;
-            }
-        }
-
-        private void OnAppleCheckChanged(object sender, CheckBox.CheckedChangeEventArgs e)
-        {
-            CheckBox androidCheckBox = FindViewById<CheckBox>(Resource.Id.androidCheckBox);
-            if (e.IsChecked)
-            {
-                androidCheckBox.Checked = false;
-            }
-        }
-
         void ClearForm()
         {
             CheckBox hudsonCheckBox = FindViewById<CheckBox>(Resource.Id.hudsonCheckBox);
@@ -163,55 +63,7 @@ namespace BayonetTickets_Android
             issueBox.Text = "";
         }
 
-        public Task<bool> DisplayNotification()
-        {
-            var tcs = new TaskCompletionSource<bool>();
-            string message = "Your ticket has been submitted." + "\n\n" + "Please press ok and schedule a date and time to meet with the IT Department.";
-            AlertDialog.Builder alert = new AlertDialog.Builder(this).SetPositiveButton("OK", (sender, args) =>
-            {
-                tcs.SetResult(true);
-            })
-            .SetTitle("Ticket Submitted")
-            .SetMessage(message);
-
-            Dialog dialog = alert.Create();
-            dialog.Show();
-
-            return tcs.Task;
-        }
-
-        public Task<string> DisplayConfirmationNotice(string reason)
-        {
-            var tcs = new TaskCompletionSource<string>();
-            AlertDialog.Builder alert = new AlertDialog.Builder(this);
-            alert.SetTitle("Open Phone Dialer");
-            alert.SetMessage("You are trying to call the " + reason + ".\nIf this is correct, press Call.\nIf not, press Cancel.");
-            alert.SetPositiveButton("Call", (senderAlert, args) => {
-                tcs.SetResult("OK");
-            });
-            alert.SetNegativeButton("Cancel", (senderAlert, args) => {
-                tcs.SetResult("Cancel");
-            });
-            Dialog dialog = alert.Create();
-            dialog.Show();
-
-            return tcs.Task;
-        }
-
-        public Task<string> DisplayFailureNotice(string reason)
-        {
-            var tcs = new TaskCompletionSource<string>();
-            AlertDialog.Builder alert = new AlertDialog.Builder(this);
-            alert.SetTitle("Not Enough Information");  
-            alert.SetMessage(reason);
-            alert.SetPositiveButton("OK", (senderAlert, args) => {
-                tcs.SetResult("OK");
-            });
-            Dialog dialog = alert.Create();
-            dialog.Show();
-
-            return tcs.Task;
-        }
+       
 
         string DetermineLocation(CheckBox hudson, CheckBox tampa, CheckBox orlando)
         {
@@ -265,7 +117,7 @@ namespace BayonetTickets_Android
             }
             return "Idk what happened";
         }
-        async Task OnSubmitClickedAsync()
+        public async Task OnSubmitClickedAsync()
         {
             CheckBox hudsonCheckBox = FindViewById<CheckBox>(Resource.Id.hudsonCheckBox);
             CheckBox tampaCheckBox = FindViewById<CheckBox>(Resource.Id.tampaCheckBox);
@@ -280,14 +132,14 @@ namespace BayonetTickets_Android
             //no location
             if (!hudsonCheckBox.Checked && !tampaCheckBox.Checked && !orlandoCheckBox.Checked)
             {
-                await DisplayFailureNotice("No location checked.");
+                await Display.DisplayFailureNotice("No location checked.");
                 return;
             }
 
             //no device type
             if (!appleCheckBox.Checked && !androidCheckBox.Checked)
             {
-                await DisplayFailureNotice("No device type checked.");
+                await Display.DisplayFailureNotice("No device type checked.");
                 return;
             }
             
@@ -295,7 +147,7 @@ namespace BayonetTickets_Android
             string name = empName.Text;
             if(name.Equals(""))
             {
-                await DisplayFailureNotice("No employee name specified.");
+                await Display.DisplayFailureNotice("No employee name specified.");
                 return;
             }
 
@@ -304,7 +156,7 @@ namespace BayonetTickets_Android
             //no issue
             if(issue.Equals(""))
             {
-                await DisplayFailureNotice("No issue entered.");
+                await Display.DisplayFailureNotice("No issue entered.");
                 return;
             }
 
@@ -320,7 +172,7 @@ namespace BayonetTickets_Android
             ticket += "Issue: " + issue + "\n";
 
             await Task.Run(() => BayonetChat.PostMessageToChat(ticket, name));
-            await DisplayNotification();
+            await Display.DisplayNotification();
 
             Analytics.TrackEvent("Ticket Submitted");
             
