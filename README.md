@@ -7,7 +7,7 @@ Future integrations are planned for the [Bayonet Ticket Manager](https://github.
 
 Once users submit a ticket, they can setup a time to meet with the IT department through the use of [Calendly](https://calendly.com/). 
 
-This application can be customized to fit any need and repourposed to send tickets as emails over using Rocket.Chat as its central server.
+This application can be customized to fit any need and repurposed to send tickets as emails over using Rocket.Chat as its central server.
 
 See a screen shot of the application below:
 
