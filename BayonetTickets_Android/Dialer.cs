@@ -38,7 +38,7 @@ namespace BayonetTickets_Android
         public static async Task OnCallMechanicClick()
         {
             Analytics.TrackEvent("Call Mechanic Button Pressed");
-            OpenDialer("");
+            OpenDialer(null);
         }
 
         public static async Task OnCallSafetyButtonClick()
