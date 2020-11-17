@@ -9,6 +9,8 @@ Once users submit a ticket, they can setup a time to meet with the IT department
 
 This application can be customized to fit any need and repurposed to send tickets as emails over using Rocket.Chat as its central server.
 
+There is also support for Analytics and Crash reporting through the [Visual Studio App Center](https://appcenter.ms/).
+
 See a screen shot of the application below:
 
 ![Screenshot](https://i.imgur.com/4b8rO3O.png)
