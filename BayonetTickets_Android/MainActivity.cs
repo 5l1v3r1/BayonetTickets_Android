@@ -55,19 +55,25 @@ namespace BayonetTickets_Android
             Button call = FindViewById<Button>(Resource.Id.callButton);
             call.Click += async delegate
             {
-                await Dialer.OnCallButtonClick();
+                string result = await DisplayConfirmationNotice("IT Department");
+                if(result.Equals("OK"))
+                    await Dialer.OnCallButtonClick();
             };
 
             Button mechanic = FindViewById<Button>(Resource.Id.mechanicButton);
             mechanic.Click += async delegate
             {
-                await Dialer.OnCallMechanicClick();
+                string result = await DisplayConfirmationNotice("Mechanic Shop");
+                if (result.Equals("OK"))
+                    await Dialer.OnCallMechanicClick();
             };
 
             Button safety = FindViewById<Button>(Resource.Id.safetyButton);
             safety.Click += async delegate
             {
-                await Dialer.OnCallSafetyButtonClick();
+                string result = await DisplayConfirmationNotice("Safety Coordinator");
+                if (result.Equals("OK"))
+                    await Dialer.OnCallSafetyButtonClick();
             };
         }
 
@@ -168,6 +174,24 @@ namespace BayonetTickets_Android
             .SetTitle("Ticket Submitted")
             .SetMessage(message);
 
+            Dialog dialog = alert.Create();
+            dialog.Show();
+
+            return tcs.Task;
+        }
+
+        public Task<string> DisplayConfirmationNotice(string reason)
+        {
+            var tcs = new TaskCompletionSource<string>();
+            AlertDialog.Builder alert = new AlertDialog.Builder(this);
+            alert.SetTitle("Open Phone Dialer");
+            alert.SetMessage("You are trying to call the " + reason + ".\nIf this is correct, press Call.\nIf not, press Cancel.");
+            alert.SetPositiveButton("Call", (senderAlert, args) => {
+                tcs.SetResult("OK");
+            });
+            alert.SetNegativeButton("Cancel", (senderAlert, args) => {
+                tcs.SetResult("Cancel");
+            });
             Dialog dialog = alert.Create();
             dialog.Show();
 
