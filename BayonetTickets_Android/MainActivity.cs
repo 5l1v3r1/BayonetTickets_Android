@@ -16,6 +16,7 @@ using Microsoft.AppCenter;
 using Microsoft.AppCenter.Analytics;
 using Microsoft.AppCenter.Crashes;
 using PermissionStatus = Plugin.Permissions.Abstractions.PermissionStatus;
+using AlertDialog = Android.App.AlertDialog;
 
 namespace BayonetTickets_Android
 {
@@ -23,7 +24,6 @@ namespace BayonetTickets_Android
     public class MainActivity : AppCompatActivity
     { 
         Page page = new Page();
-        Display disp = new Display();
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -157,6 +157,32 @@ namespace BayonetTickets_Android
             issueBox.Text = "";
         }
 
+        public Task<bool> DisplayNotification()
+        {
+            var tcs = new TaskCompletionSource<bool>();
+            string message = "Your ticket has been submitted." + "\n\n" + "Please press ok and schedule a date and time to meet with the IT Department.";
+            AlertDialog.Builder alert = new AlertDialog.Builder(this).SetPositiveButton("OK", (sender, args) =>
+            {
+                tcs.SetResult(true);
+            })
+            .SetTitle("Ticket Submitted")
+            .SetMessage(message);
+
+            Dialog dialog = alert.Create();
+            dialog.Show();
+
+            return tcs.Task;
+        }
+
+        public void DisplayFailureNotice(string reason)
+        {
+            AlertDialog.Builder alert = new AlertDialog.Builder(this);
+            alert.SetTitle("Not Enough Information");
+            alert.SetMessage(reason);
+            Dialog dialog = alert.Create();
+            dialog.Show();
+        }
+
         string DetermineLocation(CheckBox hudson, CheckBox tampa, CheckBox orlando)
         {
             if (hudson.Checked)
@@ -225,14 +251,14 @@ namespace BayonetTickets_Android
             //no location
             if (!hudsonCheckBox.Checked && !tampaCheckBox.Checked && !orlandoCheckBox.Checked)
             {
-                disp.DisplayFailureNotice("No location checked.");
+                DisplayFailureNotice("No location checked.");
                 return;
             }
 
             //no device type
             if (!appleCheckBox.Checked && !androidCheckBox.Checked)
             {
-                disp.DisplayFailureNotice("No device type checked.");
+                DisplayFailureNotice("No device type checked.");
                 return;
             }
             
@@ -240,7 +266,7 @@ namespace BayonetTickets_Android
             string name = empName.Text;
             if(name.Equals(""))
             {
-                disp.DisplayFailureNotice("No employee name specified.");
+                DisplayFailureNotice("No employee name specified.");
                 return;
             }
 
@@ -249,7 +275,7 @@ namespace BayonetTickets_Android
             //no issue
             if(issue.Equals(""))
             {
-                disp.DisplayFailureNotice("No issue entered.");
+                DisplayFailureNotice("No issue entered.");
                 return;
             }
 
@@ -265,7 +291,7 @@ namespace BayonetTickets_Android
             ticket += "Issue: " + issue + "\n";
 
             await Task.Run(() => BayonetChat.PostMessageToChat(ticket, name));
-            await disp.DisplayNotification();
+            await DisplayNotification();
 
             Analytics.TrackEvent("Ticket Pushed");
             
