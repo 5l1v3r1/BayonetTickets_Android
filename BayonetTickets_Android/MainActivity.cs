@@ -63,7 +63,7 @@ namespace BayonetTickets_Android
             issueBox.Text = "";
         }
 
-        public  void ApplyButtonListeners()
+        void ApplyButtonListeners()
         {
             MainActivity main = new MainActivity();
             Button submit = FindViewById<Button>(Resource.Id.submitButton);
@@ -97,7 +97,7 @@ namespace BayonetTickets_Android
             };
         }
 
-        public  void ApplyCheckBoxListeners()
+        public void ApplyCheckBoxListeners()
         {
             CheckBox hudsonCheckBox = FindViewById<CheckBox>(Resource.Id.hudsonCheckBox);
             CheckBox tampaCheckBox = FindViewById<CheckBox>(Resource.Id.tampaCheckBox);
