@@ -174,13 +174,19 @@ namespace BayonetTickets_Android
             return tcs.Task;
         }
 
-        public void DisplayFailureNotice(string reason)
+        public Task<string> DisplayFailureNotice(string reason)
         {
+            var tcs = new TaskCompletionSource<string>();
             AlertDialog.Builder alert = new AlertDialog.Builder(this);
-            alert.SetTitle("Not Enough Information");
+            alert.SetTitle("Not Enough Information");  
             alert.SetMessage(reason);
+            alert.SetPositiveButton("OK", (senderAlert, args) => {
+                tcs.SetResult("OK");
+            });
             Dialog dialog = alert.Create();
             dialog.Show();
+
+            return tcs.Task;
         }
 
         string DetermineLocation(CheckBox hudson, CheckBox tampa, CheckBox orlando)
