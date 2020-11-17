@@ -10,13 +10,11 @@ using Plugin.Permissions.Abstractions;
 using System;
 using System.Threading.Tasks;
 using Xamarin.Forms;
-using Button = Android.Widget.Button;
 using CheckBox = Android.Widget.CheckBox;
 using Microsoft.AppCenter;
 using Microsoft.AppCenter.Analytics;
 using Microsoft.AppCenter.Crashes;
 using PermissionStatus = Plugin.Permissions.Abstractions.PermissionStatus;
-using AlertDialog = Android.App.AlertDialog;
 
 namespace BayonetTickets_Android
 {
