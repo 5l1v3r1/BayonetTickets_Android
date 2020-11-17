@@ -1,5 +1,4 @@
-﻿using Android.App;
-using Microsoft.AppCenter.Analytics;
+﻿using Microsoft.AppCenter.Analytics;
 using System;
 using System.Threading.Tasks;
 using Xamarin.Essentials;
