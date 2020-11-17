@@ -1,4 +1,8 @@
 # BayonetTickets_Android
 ![Image of Build](https://build.appcenter.ms/v0.1/apps/504a3936-1ba3-4434-a481-f4104aa76f38/branches/master/badge)
 
-Android app to view a website containing a calendly widget.
+Bayonet Tickets - Android, is a mobile application which integrates into [Rocket.Chat](https://rocket.chat/) and provides ticket support for field based employees. 
+
+Future integrations are planned for the [Bayonet Ticket Manager](https://github.com/starhound/Bayonet_Ticket_Manager). Currently the Ticket Manager does not support tickets from the Android application.
+
+![Screenshot](https://i.imgur.com/4b8rO3O.png)
