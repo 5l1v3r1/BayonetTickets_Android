@@ -265,7 +265,6 @@ namespace BayonetTickets_Android
             }
             return "Idk what happened";
         }
-
         async Task OnSubmitClickedAsync()
         {
             CheckBox hudsonCheckBox = FindViewById<CheckBox>(Resource.Id.hudsonCheckBox);

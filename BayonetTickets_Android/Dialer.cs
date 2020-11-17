@@ -7,7 +7,6 @@ namespace BayonetTickets_Android
 {
     class Dialer
     {
-
         public static void OpenDialer(string number)
         {
             MainActivity main = new MainActivity();
