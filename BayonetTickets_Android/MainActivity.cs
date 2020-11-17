@@ -15,6 +15,7 @@ using Microsoft.AppCenter;
 using Microsoft.AppCenter.Analytics;
 using Microsoft.AppCenter.Crashes;
 using PermissionStatus = Plugin.Permissions.Abstractions.PermissionStatus;
+using Button = Android.Widget.Button;
 
 namespace BayonetTickets_Android
 {
@@ -33,14 +34,15 @@ namespace BayonetTickets_Android
             SetContentView(Resource.Layout.activity_main);
 
             //setup button events
-            Task.Run(() => Listener.ApplyButtonListeners());
+            Task.Run(() => ApplyButtonListeners());
 
             //setup checkbox listeners
-            Task.Run(() => Listener.ApplyCheckBoxListeners());
+            Task.Run(() => ApplyCheckBoxListeners());
 
             //login to API on startup
             Task.Run(() => BayonetChat.LoginToAPI());    
         }
+
         void ClearForm()
         {
             CheckBox hudsonCheckBox = FindViewById<CheckBox>(Resource.Id.hudsonCheckBox);
@@ -59,6 +61,105 @@ namespace BayonetTickets_Android
             appleCheckBox.Checked = false;
             empName.Text = "";
             issueBox.Text = "";
+        }
+
+        public  void ApplyButtonListeners()
+        {
+            MainActivity main = new MainActivity();
+            Button submit = FindViewById<Button>(Resource.Id.submitButton);
+            submit.Click += async delegate
+            {
+                await OnSubmitClickedAsync();
+            };
+
+            Button call = FindViewById<Button>(Resource.Id.callButton);
+            call.Click += async delegate
+            {
+                string result = await Display.DisplayConfirmationNotice("IT Department");
+                if (result.Equals("OK"))
+                    await Dialer.OnCallButtonClick();
+            };
+
+            Button mechanic = FindViewById<Button>(Resource.Id.mechanicButton);
+            mechanic.Click += async delegate
+            {
+                string result = await Display.DisplayConfirmationNotice("Mechanic Shop");
+                if (result.Equals("OK"))
+                    await Dialer.OnCallMechanicClick();
+            };
+
+            Button safety = FindViewById<Button>(Resource.Id.safetyButton);
+            safety.Click += async delegate
+            {
+                string result = await Display.DisplayConfirmationNotice("Safety Coordinator");
+                if (result.Equals("OK"))
+                    await Dialer.OnCallSafetyButtonClick();
+            };
+        }
+
+        public  void ApplyCheckBoxListeners()
+        {
+            CheckBox hudsonCheckBox = FindViewById<CheckBox>(Resource.Id.hudsonCheckBox);
+            CheckBox tampaCheckBox = FindViewById<CheckBox>(Resource.Id.tampaCheckBox);
+            CheckBox orlandoCheckBox = FindViewById<CheckBox>(Resource.Id.orlandoCheckBox);
+            CheckBox androidCheckBox = FindViewById<CheckBox>(Resource.Id.androidCheckBox);
+            CheckBox appleCheckBox = FindViewById<CheckBox>(Resource.Id.appleCheckBox);
+            hudsonCheckBox.CheckedChange += OnHudsonCheckChanged;
+            tampaCheckBox.CheckedChange += OnTampaCheckChanged;
+            orlandoCheckBox.CheckedChange += OnOrlandoCheckChanged;
+            androidCheckBox.CheckedChange += OnAndroidCheckChanged;
+            appleCheckBox.CheckedChange += OnAppleCheckChanged;
+        }
+
+        private void OnHudsonCheckChanged(object sender, CheckBox.CheckedChangeEventArgs e)
+        {
+            CheckBox tampaCheckBox = FindViewById<CheckBox>(Resource.Id.tampaCheckBox);
+            CheckBox orlandoCheckBox = FindViewById<CheckBox>(Resource.Id.orlandoCheckBox);
+            if (e.IsChecked)
+            {
+                tampaCheckBox.Checked = false;
+                orlandoCheckBox.Checked = false;
+            }
+        }
+
+        private void OnOrlandoCheckChanged(object sender, CheckBox.CheckedChangeEventArgs e)
+        {
+            CheckBox hudsonCheckBox = FindViewById<CheckBox>(Resource.Id.hudsonCheckBox);
+            CheckBox tampaCheckBox = FindViewById<CheckBox>(Resource.Id.tampaCheckBox);
+            if (e.IsChecked)
+            {
+                tampaCheckBox.Checked = false;
+                hudsonCheckBox.Checked = false;
+            }
+        }
+
+        private void OnTampaCheckChanged(object sender, CheckBox.CheckedChangeEventArgs e)
+        {
+            CheckBox hudsonCheckBox = FindViewById<CheckBox>(Resource.Id.hudsonCheckBox);
+            CheckBox orlandoCheckBox = FindViewById<CheckBox>(Resource.Id.orlandoCheckBox);
+            if (e.IsChecked)
+            {
+                hudsonCheckBox.Checked = false;
+                orlandoCheckBox.Checked = false;
+            }
+        }
+
+        private void OnAndroidCheckChanged(object sender, CheckBox.CheckedChangeEventArgs e)
+        {
+            CheckBox appleCheckBox = FindViewById<CheckBox>(Resource.Id.appleCheckBox);
+            if (e.IsChecked)
+            {
+                appleCheckBox.Checked = false;
+            }
+        }
+
+        private void OnAppleCheckChanged(object sender, CheckBox.CheckedChangeEventArgs e)
+        {
+            CheckBox androidCheckBox = FindViewById<CheckBox>(Resource.Id.androidCheckBox);
+            if (e.IsChecked)
+            {
+                androidCheckBox.Checked = false;
+            }
         }
 
         string DetermineLocation(CheckBox hudson, CheckBox tampa, CheckBox orlando)
