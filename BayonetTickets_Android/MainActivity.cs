@@ -162,12 +162,11 @@ namespace BayonetTickets_Android
             }
         }
 
-        public static Task<bool> DisplayNotification()
+        public Task<bool> DisplayNotification()
         {
-            MainActivity main = new MainActivity();
             var tcs = new TaskCompletionSource<bool>();
             string message = "Your ticket has been submitted." + "\n\n" + "Please press ok and schedule a date and time to meet with the IT Department.";
-            AlertDialog.Builder alert = new AlertDialog.Builder(main).SetPositiveButton("OK", (sender, args) =>
+            AlertDialog.Builder alert = new AlertDialog.Builder(this).SetPositiveButton("OK", (sender, args) =>
             {
                 tcs.SetResult(true);
             })
