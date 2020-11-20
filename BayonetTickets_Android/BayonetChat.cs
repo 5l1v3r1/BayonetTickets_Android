@@ -7,10 +7,10 @@ namespace BayonetTickets_Android
 {
     class BayonetChat
     {
-        const string API_URL = "https://bayonetchat.com/api/v1/";
-        const string BOT_NAME = "bayonet.tickets";
-        const string BOT_PASSWORD = "bayonet-9";
-        const string ROOM_ID = "nZucG9euMFuyoq9e7";
+        const string API_URL = "";
+        const string BOT_NAME = "";
+        const string BOT_PASSWORD = "";
+        const string ROOM_ID = "";
         public static RestClient client = new RestClient(API_URL);
         static string AUTH_TOKEN;
         static string USER_ID;

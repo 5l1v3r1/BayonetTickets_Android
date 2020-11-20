@@ -129,7 +129,11 @@
     <AndroidResource Include="Resources\mipmap-xxxhdpi\ic_launcher_foreground.png" />
     <AndroidResource Include="Resources\mipmap-xxxhdpi\ic_launcher_round.png" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <AndroidResourceAnalysisConfig Include="Config.xml">
+      <SubType>Designer</SubType>
+    </AndroidResourceAnalysisConfig>
+  </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.AppCenter">
       <Version>3.4.3</Version>
@@ -183,7 +187,7 @@
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <ProjectExtensions>
     <VisualStudio>
-      <UserProperties XamarinHotReloadDebuggerTimeoutExceptionBayonetTickets_AndroidHideInfoBar="True" TriggeredFromHotReload="False" />
+      <UserProperties TriggeredFromHotReload="False" XamarinHotReloadDebuggerTimeoutExceptionBayonetTickets_AndroidHideInfoBar="True" />
     </VisualStudio>
   </ProjectExtensions>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.

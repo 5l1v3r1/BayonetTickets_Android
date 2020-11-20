@@ -10,6 +10,7 @@ namespace BayonetTickets_Android
         public static void OpenDialer(string number)
         {
             MainActivity main = new MainActivity();
+            main.DisplayFailureNotice("fail");
             try
             {
                 PhoneDialer.Open(number);
