@@ -32,7 +32,7 @@ namespace BayonetTickets_Android
         public static async Task OnCallButtonClick()
         {
             Analytics.TrackEvent("Call IT Button Pressed");
-            OpenDialer("7279335322");
+            OpenDialer("");
         }
 
         public static async Task OnCallMechanicClick()
@@ -44,7 +44,7 @@ namespace BayonetTickets_Android
         public static async Task OnCallSafetyButtonClick()
         {
             Analytics.TrackEvent("Call Safety Button Pressed");
-            OpenDialer("3529427031");
+            OpenDialer("");
         }
     }
 }
