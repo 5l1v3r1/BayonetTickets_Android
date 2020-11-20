@@ -2,22 +2,35 @@
 using Newtonsoft.Json;
 using RestSharp;
 using RestSharp.Authenticators;
+using System.Xml;
 
 namespace BayonetTickets_Android
 {
     class BayonetChat
     {
-        const string API_URL = "";
-        const string BOT_NAME = "";
-        const string BOT_PASSWORD = "";
-        const string ROOM_ID = "";
-        public static RestClient client = new RestClient(API_URL);
+        static string API_URL;
+        static string BOT_NAME;
+        static string BOT_PASSWORD;
+        static string ROOM_ID;
         static string AUTH_TOKEN;
         static string USER_ID;
+
+        public static void QueryConfig()
+        {
+            Analytics.TrackEvent("Reading XML Config");
+            XmlDocument doc = new XmlDocument();
+            doc.Load("Config.xml");
+            API_URL = doc.SelectSingleNode("//configuration/RocketChat/API").InnerText;
+            BOT_NAME = doc.SelectSingleNode("//configuration/RocketChat/User").InnerText;
+            BOT_PASSWORD = doc.SelectSingleNode("//configuration/RocketChat/Password").InnerText;
+            ROOM_ID = doc.SelectSingleNode("//configuration/RocketChat/Room").InnerText;
+            LoginToAPI();
+        }
 
         public static void LoginToAPI()
         {
             Analytics.TrackEvent("Logged into API");
+            RestClient client = new RestClient(API_URL);
             client.Authenticator = new SimpleAuthenticator("user", BOT_NAME, "password", BOT_PASSWORD);
             var request = new RestRequest("login", Method.POST);
             var response = client.Execute(request);
@@ -31,6 +44,7 @@ namespace BayonetTickets_Android
 
         public static void PostMessageToChat(string ticket, string user)
         {
+            RestClient client = new RestClient(API_URL);
             var ticketRequest = new RestRequest("chat.postMessage", Method.POST);
             ticketRequest.AddHeader("X-Auth-Token", AUTH_TOKEN);
             ticketRequest.AddHeader("X-User-Id", USER_ID);

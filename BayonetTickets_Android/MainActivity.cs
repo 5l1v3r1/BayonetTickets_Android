@@ -40,8 +40,8 @@ namespace BayonetTickets_Android
             //setup checkbox listeners
             Task.Run(() => ApplyCheckBoxListeners());
 
-            //login to API on startup
-            Task.Run(() => BayonetChat.LoginToAPI());    
+            //query the config file & log into API
+            Task.Run(() => BayonetChat.QueryConfig());    
         }
 
         void ClearForm()
