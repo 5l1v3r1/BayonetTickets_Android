@@ -14,6 +14,14 @@ namespace BayonetTickets_Android
             {
                 PhoneDialer.Open(number);
             }
+            catch (ArgumentNullException anEx)
+            {
+                main.DisplayFailureNotice(anEx.Message);
+            }
+            catch (FeatureNotSupportedException ex)
+            {
+                main.DisplayFailureNotice(ex.Message);
+            }
             catch (Exception ex)
             {
                 main.DisplayFailureNotice(ex.Message);
