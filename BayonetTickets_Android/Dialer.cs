@@ -1,6 +1,7 @@
 ﻿using Microsoft.AppCenter.Analytics;
 using System;
 using System.Threading.Tasks;
+using System.Xml;
 using Xamarin.Essentials;
 
 namespace BayonetTickets_Android
@@ -29,22 +30,32 @@ namespace BayonetTickets_Android
             }
         }
 
+        public static string GetPhoneNumber(string type)
+        {
+            XmlDocument doc = new XmlDocument();
+            doc.Load(Android.App.Application.Context.Assets.Open("Config.xml"));
+            return doc.SelectSingleNode("//configuration/Phone/" + type).InnerText;
+        }
+
         public static async Task OnCallButtonClick()
         {
             Analytics.TrackEvent("Call IT Button Pressed");
-            OpenDialer("");
+            string number = GetPhoneNumber("IT");
+            OpenDialer(number);
         }
 
         public static async Task OnCallMechanicClick()
         {
             Analytics.TrackEvent("Call Mechanic Button Pressed");
-            OpenDialer(null);
+            string number = GetPhoneNumber("Mechanic");
+            OpenDialer(number);
         }
 
         public static async Task OnCallSafetyButtonClick()
         {
             Analytics.TrackEvent("Call Safety Button Pressed");
-            OpenDialer("");
+            string number = GetPhoneNumber("HR");
+            OpenDialer(number);
         }
     }
 }
