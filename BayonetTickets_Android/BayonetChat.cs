@@ -1,13 +1,13 @@
-﻿using Microsoft.AppCenter.Analytics;
+﻿using Android.Content;
+using Microsoft.AppCenter.Analytics;
 using Newtonsoft.Json;
 using RestSharp;
 using RestSharp.Authenticators;
-using System;
 using System.Xml;
 
 namespace BayonetTickets_Android
 {
-    class BayonetChat
+    class BayonetChat : MainActivity
     {
         static string API_URL;
         static string BOT_NAME;
