@@ -2,6 +2,7 @@
 using Newtonsoft.Json;
 using RestSharp;
 using RestSharp.Authenticators;
+using System;
 using System.Xml;
 
 namespace BayonetTickets_Android
@@ -19,7 +20,7 @@ namespace BayonetTickets_Android
         {
             Analytics.TrackEvent("Reading XML Config");
             XmlDocument doc = new XmlDocument();
-            doc.Load("Config.xml");
+            doc.Load(Android.App.Application.Context.Assets.Open("Config.xml"));
             API_URL = doc.SelectSingleNode("//configuration/RocketChat/API").InnerText;
             BOT_NAME = doc.SelectSingleNode("//configuration/RocketChat/User").InnerText;
             BOT_PASSWORD = doc.SelectSingleNode("//configuration/RocketChat/Password").InnerText;
@@ -49,9 +50,7 @@ namespace BayonetTickets_Android
             ticketRequest.AddHeader("X-Auth-Token", AUTH_TOKEN);
             ticketRequest.AddHeader("X-User-Id", USER_ID);
             ticketRequest.AddHeader("Content-Type", "application/json");
-
             ticketRequest.AddJsonBody((new { text = ticket, roomId = ROOM_ID, alias = user }));
-
             client.Execute(ticketRequest);
         }
     }
