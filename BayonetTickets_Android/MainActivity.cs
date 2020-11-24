@@ -6,10 +6,8 @@ using Android.Support.V7.App;
 using Android.Telephony;
 using Android.Widget;
 using Plugin.Permissions;
-using Plugin.Permissions.Abstractions;
 using System;
 using System.Threading.Tasks;
-using Xamarin.Forms;
 using CheckBox = Android.Widget.CheckBox;
 using Microsoft.AppCenter;
 using Microsoft.AppCenter.Analytics;
@@ -23,9 +21,7 @@ namespace BayonetTickets_Android
 {
     [Activity(Label = "Bayonet Tickets", Theme= "@style/AppTheme", MainLauncher = true)]
     public class MainActivity : AppCompatActivity
-    { 
-        Page page = new Page();
-
+    {
         protected override void OnCreate(Bundle savedInstanceState)
         {
             AppCenter.Start("576b46f7-5eb3-4a49-88fa-309341fb2054", typeof(Analytics), typeof(Crashes));
@@ -46,7 +42,6 @@ namespace BayonetTickets_Android
 
             //permission request
             Task.Run(() => GetPhonePermissionsAsync());
-
         }
 
         public async Task GetPhonePermissionsAsync()
@@ -115,6 +110,11 @@ namespace BayonetTickets_Android
                 string result = await DisplayConfirmationNotice("Safety Coordinator");
                 if (result.Equals("OK"))
                     await Dialer.OnCallSafetyButtonClick();
+            };
+            Button forms = FindViewById<Button>(Resource.Id.formsButton);
+            forms.Click += async delegate
+            {
+
             };
         }
 
@@ -257,33 +257,15 @@ namespace BayonetTickets_Android
         {
             try
             {
-                var status = await CrossPermissions.Current.CheckPermissionStatusAsync<PhonePermission>();
-                if (status != PermissionStatus.Granted)
-                {
-                    if (await CrossPermissions.Current.ShouldShowRequestPermissionRationaleAsync(Permission.Phone))
-                    {
-                        await page.DisplayAlert("Need Phone Number", "We need your phone number", "OK");
-                    }
-                    status = await CrossPermissions.Current.RequestPermissionAsync<PhonePermission>();
-                }
-
-                if (status == PermissionStatus.Granted)
-                {
-                    TelephonyManager mTelephonyMgr;
-                    mTelephonyMgr = (TelephonyManager)GetSystemService(Context.TelephonyService);
-                    string number = mTelephonyMgr.Line1Number.ToString();
-                    return number;
-                }
-                else if (status != PermissionStatus.Unknown)
-                {
-                    return "Permission Denied";
-                }
+                TelephonyManager mTelephonyMgr;
+                mTelephonyMgr = (TelephonyManager)GetSystemService(Context.TelephonyService);
+                string number = mTelephonyMgr.Line1Number.ToString();
+                return number;
             }
             catch (Exception ex)
             {
                 return ex.Message;
             }
-            return "Unknown Error";
         }
 
         public async Task OnSubmitClickedAsync()
