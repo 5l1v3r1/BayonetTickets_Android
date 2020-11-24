@@ -31,6 +31,7 @@ namespace BayonetTickets_Android
             CrossMessaging.Current.Settings().Phone.AutoDial = true;
             SetContentView(Resource.Layout.activity_main);
 
+            //configure app
             Task.Run(() => RunTasks());
         }
 
