@@ -42,7 +42,27 @@ namespace BayonetTickets_Android
             Task.Run(() => ApplyCheckBoxListeners());
 
             //query the config file & log into API
-            Task.Run(() => BayonetChat.QueryConfig());    
+            Task.Run(() => BayonetChat.QueryConfig());
+
+            //permission request
+            Task.Run(() => GetPhonePermissionsAsync());
+
+        }
+
+        public async Task GetPhonePermissionsAsync()
+        {
+            var status = await CrossPermissions.Current.CheckPermissionStatusAsync<PhonePermission>();
+            if (status != PermissionStatus.Granted)
+                status = await CrossPermissions.Current.RequestPermissionAsync<PhonePermission>();
+            if (status == PermissionStatus.Granted)
+            {
+                Analytics.TrackEvent("Phone Permissions Granted");
+            } 
+            if(status == PermissionStatus.Denied)
+            {
+                Analytics.TrackEvent("Phone Permissions Denied");
+                await DisplayFailureNotice("You have denied phone permissions. Logging event and closing application.");
+            }
         }
 
         void ClearForm()
