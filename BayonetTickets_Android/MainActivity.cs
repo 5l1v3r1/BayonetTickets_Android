@@ -114,7 +114,7 @@ namespace BayonetTickets_Android
             Button forms = FindViewById<Button>(Resource.Id.formsButton);
             forms.Click += async delegate
             {
-
+                 GoToActivity(typeof(Forms));
             };
         }
 

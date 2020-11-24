@@ -11,7 +11,7 @@
         android:minWidth="25px"
         android:minHeight="25px"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="531.0dp"
         android:id="@+id/linearLayout1"
         android:layout_marginBottom="1.2dp">
         <Button
@@ -46,6 +46,42 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/button4" />
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="19.8dp"
+            android:id="@+id/space4" />
+        <Button
+            android:text="Button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/button5" />
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="19.8dp"
+            android:id="@+id/space5" />
+        <Button
+            android:text="Button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/button6" />
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="19.8dp"
+            android:id="@+id/space6" />
+        <Button
+            android:text="Button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/button7" />
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="19.8dp"
+            android:id="@+id/space7" />
+        <Button
+            android:text="Button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/button8" />
     </LinearLayout>
 
 </LinearLayout>
