@@ -1,5 +1,4 @@
-﻿using Android.Content;
-using Microsoft.AppCenter.Analytics;
+﻿using Microsoft.AppCenter.Analytics;
 using Newtonsoft.Json;
 using RestSharp;
 using RestSharp.Authenticators;

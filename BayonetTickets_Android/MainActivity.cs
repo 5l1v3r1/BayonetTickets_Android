@@ -17,6 +17,7 @@ using Microsoft.AppCenter.Crashes;
 using PermissionStatus = Plugin.Permissions.Abstractions.PermissionStatus;
 using Button = Android.Widget.Button;
 using AlertDialog = Android.App.AlertDialog;
+using Plugin.Messaging;
 
 namespace BayonetTickets_Android
 {
@@ -31,7 +32,7 @@ namespace BayonetTickets_Android
             Analytics.TrackEvent("Application Launched");
             base.OnCreate(savedInstanceState);
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
-
+            CrossMessaging.Current.Settings().Phone.AutoDial = true;
             SetContentView(Resource.Layout.activity_main);
 
             //setup button events

@@ -1,38 +1,32 @@
-﻿using Microsoft.AppCenter.Analytics;
-using System;
+﻿using Android.App;
+using Microsoft.AppCenter.Analytics;
+using Plugin.Messaging;
+using Plugin.Permissions;
 using System.Threading.Tasks;
 using System.Xml;
-using Xamarin.Essentials;
+using PermissionStatus = Plugin.Permissions.Abstractions.PermissionStatus;
 
 namespace BayonetTickets_Android
 {
     class Dialer
     {
-        public static void OpenDialer(string number)
+        public static async Task OpenDialerAsync(string number)
         {
-            MainActivity main = new MainActivity();
-            try
+            var status = await CrossPermissions.Current.CheckPermissionStatusAsync<PhonePermission>();
+            if (status != PermissionStatus.Granted)
+                status = await CrossPermissions.Current.RequestPermissionAsync<PhonePermission>(); 
+            if (status == PermissionStatus.Granted)
             {
-                PhoneDialer.Open(number);
-            }
-            catch (ArgumentNullException anEx)
-            {
-                main.DisplayFailureNotice(anEx.Message);
-            }
-            catch (FeatureNotSupportedException ex)
-            {
-                main.DisplayFailureNotice(ex.Message);
-            }
-            catch (Exception ex)
-            {
-                main.DisplayFailureNotice(ex.Message);
-            }
+                var phoneDialer = CrossMessaging.Current.PhoneDialer;
+                if (phoneDialer.CanMakePhoneCall)
+                    phoneDialer.MakePhoneCall(number);
+            }        
         }
 
         public static string GetPhoneNumber(string type)
         {
             XmlDocument doc = new XmlDocument();
-            doc.Load(Android.App.Application.Context.Assets.Open("Config.xml"));
+            doc.Load(Application.Context.Assets.Open("Config.xml"));
             return doc.SelectSingleNode("//configuration/Phone/" + type).InnerText;
         }
 
@@ -40,21 +34,21 @@ namespace BayonetTickets_Android
         {
             Analytics.TrackEvent("Call IT Button Pressed");
             string number = GetPhoneNumber("IT");
-            OpenDialer(number);
+            OpenDialerAsync(number);
         }
 
         public static async Task OnCallMechanicClick()
         {
             Analytics.TrackEvent("Call Mechanic Button Pressed");
             string number = GetPhoneNumber("Mechanic");
-            OpenDialer(number);
+            OpenDialerAsync(number);
         }
 
         public static async Task OnCallSafetyButtonClick()
         {
             Analytics.TrackEvent("Call Safety Button Pressed");
             string number = GetPhoneNumber("HR");
-            OpenDialer(number);
+            OpenDialerAsync(number);
         }
     }
 }
