@@ -12,6 +12,11 @@ namespace BayonetTickets_Android
             SetContentView(Resource.Layout.download_view);
         }
 
+        public void ApplyButtonListeners()
+        {
+
+        }
+
         public override void OnBackPressed()
         {
             Finish();
