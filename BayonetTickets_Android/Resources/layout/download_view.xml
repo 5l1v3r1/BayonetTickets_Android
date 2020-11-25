@@ -11,7 +11,7 @@
         android:minWidth="25px"
         android:minHeight="25px"
         android:layout_width="match_parent"
-        android:layout_height="531.0dp"
+        android:layout_height="match_parent"
         android:id="@+id/linearLayout1"
         android:layout_marginBottom="1.2dp">
         <Space
@@ -46,10 +46,10 @@
             android:layout_height="19.8dp"
             android:id="@+id/space3" />
         <Button
-            android:text="Button"
+            android:text="Time Off Request Form"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/button4" />
+            android:id="@+id/timeoffButton" />
         <Space
             android:layout_width="match_parent"
             android:layout_height="19.8dp"
@@ -85,7 +85,7 @@
             android:text="Button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/button8" />
+            android:id="@+id/button7" />
     </LinearLayout>
 
 </LinearLayout>

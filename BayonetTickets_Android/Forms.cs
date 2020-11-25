@@ -3,8 +3,8 @@ using Android.OS;
 
 namespace BayonetTickets_Android
 {
-    [Activity(Label = "Forms")]
-    public class Forms : Activity
+    [Activity(Label = "Forms", Theme = "@style/AppTheme")]
+    public class Forms : MainActivity
     {
         protected override void OnCreate(Bundle savedInstanceState)
         {
