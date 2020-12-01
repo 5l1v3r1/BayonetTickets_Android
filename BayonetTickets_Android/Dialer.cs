@@ -14,13 +14,13 @@ namespace BayonetTickets_Android
         {
             var status = await CrossPermissions.Current.CheckPermissionStatusAsync<PhonePermission>();
             if (status != PermissionStatus.Granted)
-                status = await CrossPermissions.Current.RequestPermissionAsync<PhonePermission>(); 
+                status = await CrossPermissions.Current.RequestPermissionAsync<PhonePermission>();
             if (status == PermissionStatus.Granted)
             {
                 var phoneDialer = CrossMessaging.Current.PhoneDialer;
                 if (phoneDialer.CanMakePhoneCall)
                     phoneDialer.MakePhoneCall(number);
-            }        
+            }
         }
 
         public static string GetPhoneNumber(string type)

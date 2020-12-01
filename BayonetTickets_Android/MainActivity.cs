@@ -5,21 +5,21 @@ using Android.Runtime;
 using Android.Support.V7.App;
 using Android.Telephony;
 using Android.Widget;
-using Plugin.Permissions;
-using System;
-using System.Threading.Tasks;
-using CheckBox = Android.Widget.CheckBox;
 using Microsoft.AppCenter;
 using Microsoft.AppCenter.Analytics;
 using Microsoft.AppCenter.Crashes;
-using PermissionStatus = Plugin.Permissions.Abstractions.PermissionStatus;
-using Button = Android.Widget.Button;
-using AlertDialog = Android.App.AlertDialog;
 using Plugin.Messaging;
+using Plugin.Permissions;
+using System;
+using System.Threading.Tasks;
+using AlertDialog = Android.App.AlertDialog;
+using Button = Android.Widget.Button;
+using CheckBox = Android.Widget.CheckBox;
+using PermissionStatus = Plugin.Permissions.Abstractions.PermissionStatus;
 
 namespace BayonetTickets_Android
 {
-    [Activity(Label = "Bayonet Tickets", Theme= "@style/AppTheme", MainLauncher = true)]
+    [Activity(Label = "Bayonet Tickets", Theme = "@style/AppTheme", MainLauncher = true)]
     public class MainActivity : AppCompatActivity
     {
         protected override void OnCreate(Bundle savedInstanceState)
@@ -58,8 +58,8 @@ namespace BayonetTickets_Android
             if (status == PermissionStatus.Granted)
             {
                 Analytics.TrackEvent("Phone Permissions Granted");
-            } 
-            if(status == PermissionStatus.Denied)
+            }
+            if (status == PermissionStatus.Denied)
             {
                 Analytics.TrackEvent("Phone Permissions Denied");
                 await DisplayFailureNotice("You have denied phone permissions. Logging event and closing application.");
@@ -120,7 +120,7 @@ namespace BayonetTickets_Android
             Button forms = FindViewById<Button>(Resource.Id.formsButton);
             forms.Click += async delegate
             {
-                  GoToActivity(typeof(Forms));
+                GoToActivity(typeof(Forms));
             };
         }
 
@@ -212,10 +212,12 @@ namespace BayonetTickets_Android
             AlertDialog.Builder alert = new AlertDialog.Builder(this);
             alert.SetTitle("Open Phone Dialer");
             alert.SetMessage("You are trying to call the " + reason + ".\nIf this is correct, press Call.\nIf not, press Cancel.");
-            alert.SetPositiveButton("Call", (senderAlert, args) => {
+            alert.SetPositiveButton("Call", (senderAlert, args) =>
+            {
                 tcs.SetResult("OK");
             });
-            alert.SetNegativeButton("Cancel", (senderAlert, args) => {
+            alert.SetNegativeButton("Cancel", (senderAlert, args) =>
+            {
                 tcs.SetResult("Cancel");
             });
             Dialog dialog = alert.Create();
@@ -230,7 +232,8 @@ namespace BayonetTickets_Android
             AlertDialog.Builder alert = new AlertDialog.Builder(this);
             alert.SetTitle("Not Enough Information");
             alert.SetMessage(reason);
-            alert.SetPositiveButton("OK", (senderAlert, args) => {
+            alert.SetPositiveButton("OK", (senderAlert, args) =>
+            {
                 tcs.SetResult("OK");
             });
             Dialog dialog = alert.Create();
@@ -299,10 +302,10 @@ namespace BayonetTickets_Android
                 await DisplayFailureNotice("No device type checked.");
                 return;
             }
-            
+
             //no name
             string name = empName.Text;
-            if(name.Equals(""))
+            if (name.Equals(""))
             {
                 await DisplayFailureNotice("No employee name specified.");
                 return;
@@ -311,7 +314,7 @@ namespace BayonetTickets_Android
             string issue = issueBox.Text;
 
             //no issue
-            if(issue.Equals(""))
+            if (issue.Equals(""))
             {
                 await DisplayFailureNotice("No issue entered.");
                 return;
@@ -332,7 +335,7 @@ namespace BayonetTickets_Android
             await DisplayNotification();
 
             Analytics.TrackEvent("Ticket Submitted");
-            
+
             Task.Run(() => ClearForm());
 
             GoToActivity(typeof(Calendly));
@@ -342,11 +345,11 @@ namespace BayonetTickets_Android
         {
             StartActivity(myActivity);
         }
-      
+
         public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Android.Content.PM.Permission[] grantResults)
         {
             PermissionsImplementation.Current.OnRequestPermissionsResult(requestCode, permissions, grantResults);
             base.OnRequestPermissionsResult(requestCode, permissions, grantResults);
         }
-	}
+    }
 }
